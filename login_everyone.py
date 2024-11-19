@@ -3,9 +3,9 @@
 
 # login_everyone.py
 
-import sys
+'''import sys
 import getpass
-import sqlite3
+import sqlite3'''
 
 def LogInPage(connection, cursor):
     login_state = False
