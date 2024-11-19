@@ -1,0 +1,27 @@
+digraph G {
+prog=dot;
+mode=ipsep;
+overlap=ipsep;
+sep=0.01;
+concentrate=True;
+rankdir=LR;
+follows [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">follows</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="flwer">- flwer : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="flwee">- flwee : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="start_date">- start_date : DATE</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+users [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">users</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="usr">- usr : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="name">- name : TEXT</TD></TR><TR><TD ALIGN="LEFT" PORT="email">- email : TEXT</TD></TR><TR><TD ALIGN="LEFT" PORT="phone">- phone : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="pwd">- pwd : TEXT</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+hashtag_mentions [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">hashtag_mentions</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="tid">- tid : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="term">- term : TEXT</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+tweets [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">tweets</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="tid">- tid : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="writer_id">- writer_id : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="text">- text : TEXT</TD></TR><TR><TD ALIGN="LEFT" PORT="tdate">- tdate : DATE</TD></TR><TR><TD ALIGN="LEFT" PORT="ttime">- ttime : TIME</TD></TR><TR><TD ALIGN="LEFT" PORT="replyto_tid">- replyto_tid : INTEGER</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+include [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">include</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="owner_id">- owner_id : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="lname">- lname : TEXT</TD></TR><TR><TD ALIGN="LEFT" PORT="tid">- tid : INTEGER</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+lists [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">lists</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="owner_id">- owner_id : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="lname">- lname : TEXT</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+retweets [shape=plaintext, label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD ALIGN="CENTER">retweets</TD></TR><TR><TD BORDER="1" CELLPADDING="0"></TD></TR><TR><TD ALIGN="LEFT" PORT="tid">- tid : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="retweeter_id">- retweeter_id : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="writer_id">- writer_id : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="spam">- spam : INTEGER</TD></TR><TR><TD ALIGN="LEFT" PORT="rdate">- rdate : DATE</TD></TR></TABLE>>, fontname="Bitstream-Vera Sans", fontsize=7.0];
+users -> follows [headlabel="+ usr", taillabel="+ flwer", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+users -> follows [headlabel="+ usr", taillabel="+ flwee", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+tweets -> hashtag_mentions [headlabel="+ tid", taillabel="+ tid", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+tweets -> tweets [headlabel="+ tid", taillabel="+ replyto_tid", arrowhead=odot, arrowtail=crow, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+tweets -> users [headlabel="+ usr", taillabel="+ writer_id", arrowhead=odot, arrowtail=crow, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+tweets -> include [headlabel="+ tid", taillabel="+ tid", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+lists -> include [headlabel="+ lname", taillabel="+ lname", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+lists -> include [headlabel="+ owner_id", taillabel="+ owner_id", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+users -> lists [headlabel="+ usr", taillabel="+ owner_id", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+users -> retweets [headlabel="+ usr", taillabel="+ retweeter_id", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+tweets -> retweets [headlabel="+ tid", taillabel="+ tid", arrowhead=none, arrowtail=empty, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+retweets -> users [headlabel="+ usr", taillabel="+ writer_id", arrowhead=odot, arrowtail=crow, fontname="Bitstream-Vera Sans", fontsize=7.0, dir=both];
+}
